@@ -2,39 +2,25 @@ import { RiArrowDownSLine } from "react-icons/ri";
 import Products from "./Products";
 import { products } from "../../mocks/products.json";
 import Header from "./Header";
-import { useId, useState } from "react";
+import {  useId, useState } from "react";
+import { useFilters } from "../../hooks/useFilters";
 
+
+//Funcion principal
 function Content() {
-
   const minPriceFilterId = useId()
   const categoryFilterId = useId()
-  // filtrar por categoria y precio
-  const [filters, setFilter] = useState({
-    category: "all",
-    minPrice: 0,
-  });
-
-  const filterProducts = (products) => {
-    return products.filter((product) => {
-      return (
-        product.price >= filters.minPrice &&
-        (filters.category === "all" || product.category === filters.category)
-      );
-    });
-  };
-
+  const {filterProducts, setFilter, filters} = useFilters();
   const filteredProducts = filterProducts(products);
 
 //Mostrar el rango del precio
 const [minPrice, setMinPrice] = useState(0);
-
 const handleChangeMinPrice = e =>{
-  setMinPrice(e.target.value)
+ 
   setFilter(prevState => ({
     ...prevState,
     minPrice: e.target.value
   }))
-  
 }
 //Mostrar por categoria
 const handleChangeCategory = e => {
@@ -59,6 +45,7 @@ const handleChangeCategory = e => {
                 id={categoryFilterId}
                 onChange={handleChangeCategory}
                 className="text-gray-300 bg-[#1F1d2b] rounded-lg text-sm px-2 py-1 w-full appearance-none focus:outline-none"
+                value={filters.category}
             >
                 <option value="all">Todas</option>
                 <option value="home-decoration">Articulos para casa</option>
@@ -77,8 +64,9 @@ const handleChangeCategory = e => {
             max="1000"
             onChange={handleChangeMinPrice}
             className="w-full"
+            value={filters.minPrice}
         />
-        <span>${minPrice}</span>
+        <span>${filters.minPrice}</span>
     </div>
 </div>
 
