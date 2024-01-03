@@ -10,7 +10,7 @@ import { useCart } from "../../hooks/useCart";
 
 function Nav({showMenu, toggleMenu, toggleOrders}) {
 
-  const {  setCartCount,cartCount }= useCart();
+  const { cartCount }= useCart();
  
   return (
     <>

@@ -4,7 +4,7 @@ import Nav from "./Components/shared/Nav";
 import { useState } from "react";
 import Sidebar from "./Components/shared/Sidebar";
 import { CartProvider } from "./context/cart";
-import { Footer } from "./Components/shared/Footer";
+
 
 function App() {
   // Mostrar menu y carrito de compras
@@ -30,7 +30,6 @@ function App() {
         <Sidebar showMenu={showMenu} />
         <Nav toggleMenu={toggleMenu} toggleOrders={toggleOrders} />
       </main>
-      <Footer/>
     </div>
     </CartProvider>
   );
